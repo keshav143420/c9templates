@@ -1,5 +1,5 @@
 FROM cloud9/ws-python-plain
-MAINTAINER Cloud9 IDE, inc. <info@c9.io>
+LABEL maintainer="Cloud9 IDE, inc. <info@c9.io>"
 
 RUN pip install Django==1.9
 

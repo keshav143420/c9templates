@@ -1,5 +1,5 @@
 FROM cloud9/workspace
-MAINTAINER Cloud9 IDE, inc. <info@c9.io>
+LABEL maintainer="Cloud9 IDE, inc. <info@c9.io>"
 
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update && \

@@ -1,5 +1,5 @@
 FROM cloud9/workspace
-MAINTAINER Cloud9 IDE, inc. <info@c9.io>
+LABEL maintainer="Cloud9 IDE, inc. <info@c9.io>"
 
 ADD ./files /home/ubuntu
 

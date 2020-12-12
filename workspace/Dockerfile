@@ -1,5 +1,5 @@
-FROM ubuntu:14.04.5
-MAINTAINER Cloud9 IDE, inc. <info@c9.io>
+FROM ubuntu:20.10
+LABEL maintainer="Cloud9 IDE, inc. <info@c9.io>"
 
 ENV DEBIAN_FRONTEND noninteractive
 
