@@ -17,10 +17,9 @@ RUN apt-get install -y software-properties-common apt-transport-https
 # Add a recent version of git
 RUN add-apt-repository -y ppa:git-core/ppa
 # 32-bit support
-RUN dpkg --add-architecture i386 && \
-    apt-get update --fix-missing && \
-    apt-get install -y libc6:i386 libncurses5:i386 libstdc++6:i386
-RUN apt-get install -y bash console-setup sudo wget curl git python python-pip python3 python3-pip man-db && \
+RUN apt-get update --fix-missing
+
+RUN apt-get install -y bash console-setup sudo wget curl git python python3 python3-pip man-db && \
     echo "install console-setup" && \
     echo "console-setup   console-setup/codeset47 select  # Latin1 and Latin5 - western Europe and Turkic languages" | debconf-set-selections && \
     echo "console-setup   console-setup/fontface47        select  Fixed" | debconf-set-selections && \
@@ -52,18 +51,18 @@ RUN bash -l -c "npm set progress=false"
 USER root
 
 # Java
-RUN apt-get install -y openjdk-7-jre
-RUN apt-get install -y ant maven2
+RUN apt-get install -y openjdk-8-jre
+RUN apt-get install -y ant maven gradle
 
 # editors
-RUN apt-get install -y nano vim vim-addon-manager vim-vimoutliner vim-doc ctags indent
+RUN apt-get install -y nano vim vim-addon-manager vim-doc indent
 
 # servers
 RUN apt-get install -y redis-server redis-tools nginx mysql-server \
-    rabbitmq-server couchdb
+    rabbitmq-server
 
 # Postgres
-RUN apt-get install -y postgresql-9.3 && \
+RUN apt-get install -y postgresql && \
     /etc/init.d/postgresql start && \
     sudo -u postgres createuser -srd ubuntu && \
     sudo -u postgres psql -c "create database ubuntu owner=ubuntu"
@@ -74,7 +73,10 @@ RUN apt-get install -y dnsutils bash-completion xsltproc \
     parallel strace ltrace flex jq ack-grep gdb valgrind locate tree time \
     zip unp cmake
 RUN apt-file update
+RUN apt-get -f install
 
+
+RUN apt-get update --fix-missing
 # Version control
 RUN apt-get install -y git-all tig subversion subversion-tools cvs \
     mercurial bzr bzrtools git-svn
